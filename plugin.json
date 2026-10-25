@@ -1,0 +1,13 @@
+{
+    "id": "pixelTodoList",
+    "name": "Pixel To-Do List",
+    "description": "Android Pixel-style Material You desktop To-Do List widget",
+    "version": "1.0.0",
+    "author": "Oliver",
+    "icon": "checklist",
+    "type": "desktop",
+    "capabilities": ["desktop-widget"],
+    "component": "./PixelTodoListWidget.qml",
+    "requires_dms": ">=1.6.0",
+    "permissions": ["settings_read", "settings_write"]
+}

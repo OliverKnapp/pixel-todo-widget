@@ -209,7 +209,6 @@ DesktopPluginComponent {
                                 var endBracket = rawSummary.indexOf("]");
                                 if (endBracket > 1) {
                                     var course = rawSummary.substring(1, endBracket);
-                                    // Shorten long course names
                                     if (course.length > 18) {
                                         course = course.substring(0, 16) + "...";
                                     }
@@ -334,7 +333,7 @@ DesktopPluginComponent {
                     width: 32
                     height: 32
                     radius: 16
-                    color: Theme.withAlpha(Theme.primary, 0.15)
+                    color: Theme.withAlpha(Theme.primary, 0.2)
 
                     DankIcon {
                         anchors.centerIn: parent
@@ -349,7 +348,7 @@ DesktopPluginComponent {
                     font.family: root.sansBold
                     font.pixelSize: 18
                     font.weight: Font.Bold
-                    color: Theme.onSurface
+                    color: "#ffffff"
                     Layout.fillWidth: true
                 }
 
@@ -357,7 +356,7 @@ DesktopPluginComponent {
                 Rectangle {
                     visible: root.pendingCount > 0
                     radius: 12
-                    color: Theme.secondaryContainer
+                    color: Theme.withAlpha(Theme.primary, 0.25)
                     implicitWidth: countText.implicitWidth + 14
                     implicitHeight: 22
 
@@ -367,8 +366,8 @@ DesktopPluginComponent {
                         text: root.pendingCount
                         font.family: root.sansMedium
                         font.pixelSize: 11
-                        font.weight: Font.Medium
-                        color: Theme.onSecondaryContainer
+                        font.weight: Font.Bold
+                        color: "#ffffff"
                     }
                 }
 
@@ -384,7 +383,8 @@ DesktopPluginComponent {
                         anchors.centerIn: parent
                         name: "sync"
                         size: 16
-                        color: root.isSyncing ? Theme.primary : Theme.onSurfaceVariant
+                        color: root.isSyncing ? Theme.primary : "#ffffff"
+                        opacity: root.isSyncing ? 1.0 : 0.75
                         rotation: 0
 
                         RotationAnimation on rotation {
@@ -416,7 +416,8 @@ DesktopPluginComponent {
                         anchors.centerIn: parent
                         name: root.showCompleted ? "visibility" : "visibility_off"
                         size: 16
-                        color: root.showCompleted ? Theme.primary : Theme.onSurfaceVariant
+                        color: root.showCompleted ? Theme.primary : "#ffffff"
+                        opacity: root.showCompleted ? 1.0 : 0.75
                     }
 
                     MouseArea {
@@ -451,7 +452,9 @@ DesktopPluginComponent {
                         height: 26
                         radius: 13
                         readonly property bool isSelected: root.activeCalendarId === model.id
-                        color: isSelected ? Theme.primary : Theme.surfaceContainerHighest
+                        color: isSelected ? Theme.primary : Theme.withAlpha(Theme.surfaceContainerHighest, 0.7)
+                        border.color: isSelected ? Theme.primary : Theme.withAlpha(Theme.outlineVariant, 0.35)
+                        border.width: 1
                         implicitWidth: chipLabel.implicitWidth + 20
 
                         Text {
@@ -461,7 +464,7 @@ DesktopPluginComponent {
                             font.family: root.sansMedium
                             font.pixelSize: 11
                             font.weight: Font.Medium
-                            color: chip.isSelected ? Theme.onPrimary : Theme.onSurfaceVariant
+                            color: chip.isSelected ? Theme.onPrimary : "#ffffff"
                         }
 
                         MouseArea {
@@ -482,7 +485,7 @@ DesktopPluginComponent {
                 height: 40
                 radius: 20
                 color: Theme.surfaceContainerHigh
-                border.color: inputField.activeFocus ? Theme.primary : Theme.withAlpha(Theme.outlineVariant, 0.3)
+                border.color: inputField.activeFocus ? Theme.primary : Theme.withAlpha(Theme.outlineVariant, 0.35)
                 border.width: inputField.activeFocus ? 2 : 1
 
                 RowLayout {
@@ -494,13 +497,14 @@ DesktopPluginComponent {
                     DankIcon {
                         name: "add"
                         size: 18
-                        color: inputField.activeFocus ? Theme.primary : Theme.onSurfaceVariant
+                        color: inputField.activeFocus ? Theme.primary : "#ffffff"
+                        opacity: inputField.activeFocus ? 1.0 : 0.7
                     }
 
                     TextInput {
                         id: inputField
                         Layout.fillWidth: true
-                        color: Theme.onSurface
+                        color: "#ffffff"
                         font.family: root.sansRegular
                         font.pixelSize: 13
                         selectByMouse: true
@@ -516,7 +520,7 @@ DesktopPluginComponent {
                                 return "Add a task...";
                             }
                             font.family: root.sansRegular
-                            color: Theme.onSurfaceVariant
+                            color: Qt.rgba(1, 1, 1, 0.55)
                             font.pixelSize: 13
                         }
 
@@ -531,7 +535,7 @@ DesktopPluginComponent {
                         width: 26
                         height: 26
                         radius: 13
-                        color: addBtnMouse.containsMouse ? Theme.primary : Theme.withAlpha(Theme.primary, 0.8)
+                        color: addBtnMouse.containsMouse ? Theme.primary : Theme.withAlpha(Theme.primary, 0.85)
 
                         DankIcon {
                             anchors.centerIn: parent
@@ -569,7 +573,7 @@ DesktopPluginComponent {
                         Layout.alignment: Qt.AlignHCenter
                         name: "task_alt"
                         size: 36
-                        color: Theme.withAlpha(Theme.primary, 0.6)
+                        color: Theme.primary
                     }
 
                     Text {
@@ -578,7 +582,7 @@ DesktopPluginComponent {
                         font.family: root.sansMedium
                         font.pixelSize: 13
                         font.weight: Font.Medium
-                        color: Theme.onSurfaceVariant
+                        color: "#ffffff"
                     }
                 }
 
@@ -609,7 +613,7 @@ DesktopPluginComponent {
                                 height: 22
                                 radius: 11
                                 color: model.done ? Theme.primary : "transparent"
-                                border.color: model.done ? Theme.primary : Theme.outline
+                                border.color: model.done ? Theme.primary : Qt.rgba(1, 1, 1, 0.5)
                                 border.width: model.done ? 0 : 2
 
                                 DankIcon {
@@ -638,7 +642,7 @@ DesktopPluginComponent {
                                     font.family: root.sansRegular
                                     font.pixelSize: 13
                                     font.strikeout: model.done
-                                    color: model.done ? Theme.withAlpha(Theme.onSurface, 0.45) : Theme.onSurface
+                                    color: model.done ? Qt.rgba(1, 1, 1, 0.45) : "#ffffff"
                                     elide: Text.ElideRight
 
                                     MouseArea {
@@ -659,7 +663,9 @@ DesktopPluginComponent {
                                         visible: model.tagBadge.length > 0
                                         height: 16
                                         radius: 8
-                                        color: Theme.surfaceContainerHighest
+                                        color: Theme.withAlpha(Theme.surfaceContainerHighest, 0.8)
+                                        border.color: Theme.withAlpha(Theme.outlineVariant, 0.25)
+                                        border.width: 1
                                         implicitWidth: tagLabel.implicitWidth + 10
 
                                         Text {
@@ -669,7 +675,8 @@ DesktopPluginComponent {
                                             font.family: root.sansMedium
                                             font.pixelSize: 9
                                             font.weight: Font.Medium
-                                            color: Theme.onSurfaceVariant
+                                            color: "#ffffff"
+                                            opacity: 0.85
                                         }
                                     }
 
@@ -678,7 +685,9 @@ DesktopPluginComponent {
                                         visible: model.dueLabel.length > 0
                                         height: 16
                                         radius: 8
-                                        color: model.isOverdue ? Theme.errorContainer : Theme.secondaryContainer
+                                        color: model.isOverdue ? Theme.errorContainer : Theme.withAlpha(Theme.primary, 0.2)
+                                        border.color: model.isOverdue ? Theme.error : Theme.withAlpha(Theme.primary, 0.4)
+                                        border.width: 1
                                         implicitWidth: dueLabel.implicitWidth + 10
 
                                         Text {
@@ -688,7 +697,7 @@ DesktopPluginComponent {
                                             font.family: root.sansMedium
                                             font.pixelSize: 9
                                             font.weight: Font.Medium
-                                            color: model.isOverdue ? Theme.onErrorContainer : Theme.onSecondaryContainer
+                                            color: model.isOverdue ? "#ffffff" : Theme.primary
                                         }
                                     }
                                 }
@@ -710,7 +719,7 @@ DesktopPluginComponent {
                                     anchors.centerIn: parent
                                     name: "close"
                                     size: 14
-                                    color: delMouse.containsMouse ? Theme.onErrorContainer : Theme.onSurfaceVariant
+                                    color: delMouse.containsMouse ? Theme.onErrorContainer : "#ffffff"
                                 }
 
                                 MouseArea {
